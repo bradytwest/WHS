@@ -1,0 +1,50 @@
+.CustomCalendarComponent {
+  .container {
+    width: 100%;
+  }
+
+  .col {
+    float: left;
+    position: relative;
+    // width: 80px;
+    // height: 80px;
+    touch-action: manipulation;
+
+    
+    & img,
+    & .text {
+      cursor: pointer;
+    }   
+
+    &.disabled {
+      & img,
+      & .text {
+        cursor: default;
+      }
+    }
+
+    img {
+      // width: 80px;
+      // height: 80px;      
+    }
+
+    .text {      
+      text-align: center;
+
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .enabled {      
+    }
+
+    .preselected {
+    }
+
+    .disabled {      
+    
+    }
+  }
+}

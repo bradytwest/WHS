@@ -1,0 +1,115 @@
+﻿Type
+
+   TComplete = (IWComp "<IWER>Interview Complete</IWER>")
+   
+   TContinue = (Continue "</IWER>Continue</IWER>"), NODONTKNOW, NOREFUSAL 
+   
+   TYesNo = (Yes (1) "Yes",
+             No  (5) "No") 
+             
+             
+  { TMethods = (BCP         (1) "Birth control pills" MethodHelp "Also called the pill, oral contraceptives, OCs.  A series of pills taken orally (by mouth) for 21 to 28 days of the menstrual cycle.  Pills are used to help women prevent pregnancy. They can also be used to regulate menstrual periods, help relieve pain from cramps, or to treat acne.",
+               Condom      (2) "Condom" MethodHelp "Also called rubbers. Latex or rubber covering placed tightly over the penis during sex.  These form a barrier between the penis and the woman’s vagina.  Used to prevent pregnancy and to protect against sexually transmitted diseases, such as herpes and AIDS.",
+               Vasectomy   (3) "Vasectomy" MethodHelp "Male sterilization.  An operation performed on the man to cause sterility by cutting or removing part of the male sperm duct (vans deferens) so that sperm can no longer pass through.",
+               Tubal       (4) "Female sterilizing operation" MethodHelp "such as tubal sterilization or hysterectomy",
+               Depo        (5) "Depo-Provera™ or injectable" MethodHelp "A shot or injection of a hormone (progestin) or hormones (estrogen and progestin) that is given every 3 months to prevent pregnancy.  Also known as \"Depo\".",
+               Withdrawl   (6) "Withdrawal or \"pulling out\"" MethodHelp "Also called coitus interruptus. The man removes his penis from the woman’s vagina before he ejaculates.",
+               Calendar    (7) "Calendar rhythm,  Standard Days, or Cycle Beads method" MethodHelp "With these methods, a woman counts the days in her menstrual cycle to identify which days she can get pregnant, or \"unsafe\" days.",
+               Temperature (8) "Safe period by temperature or cervical mucus test" MethodHelp "A woman’s fertile period is determined by using a thermometer to check her temperature and by looking at the consistency of her cervical mucus. The woman then abstains from sexual intercourse during her fertile period.",
+               Patch       (9) "Contraceptive patch" MethodHelp "Also called Ortho-Evra.  A patch about the size of a half-dollar that is worn on the upper- outer arm, the torso, the abdomen, or the buttocks, to prevent pregnancy.  The patch is removed and replaced every seven days for a total of 21 days.  The patch contains the same hormones found in oral contraceptives, but they are absorbed through the skin.",
+               Ring        (10) "Vaginal contraceptive ring (or Nuva Ring™)" MethodHelp "A clear, flexible 2-inch ring that is inserted into the vagina and left there for 3 weeks.  Low doses of hormones that prevent pregnancy are continuously released into the body.",
+               Emergency   (11) "Emergency contraception" MethodHelp "This is a series of regular birth control pills taken within 72 hours, or within 5 days, after unprotected sex to help a woman avoid pregnancy.  Some examples of names for this are: \"Plan B™\", \"Preven™\", \"Ella™\", \"Next Choice™\", or \"Morning After\" pills. Additional names include \"Take Action\" and \"My Way\".",               
+               Implant     (12) "Hormonal implants" MethodHelp "Norplant™ or Implanon™):  Small matchstick-like rods (of progestin) inserted under the skin of a woman’s arm, usually performed by a doctor or nurse.  Protects against pregnancy for five years, or until the rods are removed.",
+               Diaphragm   (13) "Diaphragm" MethodHelp "A latex rubber device inserted into the vagina to cover the cervix to block the entry of sperm into the uterus during sex. Used with spermicidal jelly or cream.",
+               FemCondom   (14) "Female condom, vaginal pouch" MethodHelp "A loose fitting lining with a flexible ring at both ends that is used before sex to block the entry of sperm into the uterus. Used to prevent pregnancy and to protect against sexually transmitted diseases.",
+               Foam        (15) "Foam" MethodHelp "A spermicidal foaming substance inserted in the vagina before sex to prevent pregnancy or to help protect against disease.",
+               Jelly       (16) "Jelly or cream (other than with a diaphragm)" MethodHelp "A spermicidal gel or thick creamy substance used in the vagina during sex to prevent pregnancy or to help protect against disease.",
+               CervCap     (17) "Cervical cap" MethodHelp "A small latex rubber device inserted in the vagina and placed over the cervix before sex to block the entry of sperm into the uterus.  Similar to a diaphragm.  May be used with or without spermicide.",
+               Suppository (18) "Suppository, insert" MethodHelp "A tablet, capsule, or solid substance that dissolves in the vagina to produce a spermicidal foam or cream. It is inserted prior to sex to prevent pregnancy.  May also help protect against disease.",
+               Sponge      (19) "Today™ sponge" MethodHelp "The brand name of a vaginal contraceptive, this disposable foam sponge is inserted in the vagina before sex and covers the cervix. It is a disposable, soft sponge that contains a spermicide that foams when moistened with water.",
+               IUD         (20) "IUD, coil, loop" MethodHelp "Intra-uterine device, also called intra-uterine contraceptive device (IUCD). A plastic or copper and plastic device inserted by a medical person into the uterus to prevent pregnancy.",
+               Other       (21) "Other method" ,
+               Never       (22) "Never used a contraceptive method")}
+ 
+ 
+   
+   TMethods = (opt1 "^auxOpt[1]"    HELP "^auxOptInfo[1]",
+               opt2 "^auxOpt[2]"    HELP "^auxOptInfo[2]",
+               opt3 "^auxOpt[3]"    HELP "^auxOptInfo[3]",
+               opt4 "^auxOpt[4]"    HELP "^auxOptInfo[4]",
+               opt5 "^auxOpt[5]"    HELP "^auxOptInfo[5]",
+               opt6 "^auxOpt[6]"    HELP "^auxOptInfo[6]",
+               opt7 "^auxOpt[7]"    HELP "^auxOptInfo[7]",
+               opt8 "^auxOpt[8]"    HELP "^auxOptInfo[8]",
+               opt9 "^auxOpt[9]"    HELP "^auxOptInfo[9]",
+               opt10 "^auxOpt[10]"  HELP "^auxOptInfo[10]",
+               opt11 "^auxOpt[11]"  HELP "^auxOptInfo[11]",
+               opt12 "^auxOpt[12]"  HELP "^auxOptInfo[12]",
+               opt13 "^auxOpt[13]"  HELP "^auxOptInfo[13]",
+               opt14 "^auxOpt[14]"  HELP "^auxOptInfo[14]",
+               opt15 "^auxOpt[15]"  HELP "^auxOptInfo[15]",
+               opt16 "^auxOpt[16]"  HELP "^auxOptInfo[16]",
+               opt17 "^auxOpt[17]"  HELP "^auxOptInfo[17]",
+               opt18 "^auxOpt[18]"  HELP "^auxOptInfo[18]",
+               opt19 "^auxOpt[19]"  HELP "^auxOptInfo[19]",
+               opt20 "^auxOpt[20]"  HELP "^auxOptInfo[20]",
+               opt21 "^auxOpt[21]" ,
+               opt22 "^auxOpt[22]" )
+   
+   
+   TMonths = (startMonthMinus24 "^auxMonthString[1]",
+              startMonthMinus23 "^auxMonthString[2]",
+              startMonthMinus22 "^auxMonthString[3]",
+              startMonthMinus21 "^auxMonthString[4]",
+              startMonthMinus20 "^auxMonthString[5]",
+              startMonthMinus19 "^auxMonthString[6]",
+              startMonthMinus18 "^auxMonthString[7]",
+              startMonthMinus17 "^auxMonthString[8]",
+              startMonthMinus16 "^auxMonthString[9]",
+              startMonthMinus15 "^auxMonthString[10]",
+              startMonthMinus14 "^auxMonthString[11]",
+              startMonthMinus13 "^auxMonthString[12]",
+              startMonthMinus12 "^auxMonthString[13]",
+              startMonthMinus11 "^auxMonthString[14]",
+              startMonthMinus10 "^auxMonthString[15]",
+              startMonthMinus9 "^auxMonthString[16]",
+              startMonthMinus8 "^auxMonthString[17]",
+              startMonthMinus7 "^auxMonthString[18]",
+              startMonthMinus6 "^auxMonthString[19]",
+              startMonthMinus5 "^auxMonthString[20]",
+              startMonthMinus4 "^auxMonthString[21]",
+              startMonthMinus3 "^auxMonthString[22]",
+              startMonthMinus2 "^auxMonthString[23]",
+              startMonthMinus1 "^auxMonthString[24]") 
+ 
+
+
+   TAgree = (StrongAg  (1) "Strongly agree",
+             Agree     (2) "Agree",            
+             Neutral   (3) "Neutral",
+             Disagree  (4) "Disagree",
+             StrongDis (5) "Strongly disagree") 
+             
+             
+   TSex = (Male   (1) "Male",
+           Female (5) "Female",
+           Other  (7) "Other")   
+           
+           
+   TRace = (AmerIndianAkNative (1) "American Indian or Alaska Native",
+            Asian              (2) "Asian",
+            NatHiPacIsland     (3) "Native Hawaiian or Other Pacific Islander",
+            BlackAfrAmerican   (4) "Black or African American",
+            White              (5) "White")    
+            
+            
+  { TRaceEthn = (Hispanic     (1) "Hispanic",
+                NonHispBlack (2) "Non-Hispanic Black",
+                NonHispWhite (3) "Non-Hispanic White",
+                None         (4) "None")}
+                
+   TRaceEthn = (Hispanic     (1) "Hispanic",
+                NonHispBlack (2) "Non-Hispanic Black",
+                NonHispOther (3) "Non-Hispanic Other")                
+                                                    
+                             

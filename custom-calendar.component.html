@@ -1,0 +1,18 @@
+<div [ngClass]="cssClass" [ngStyle]="style" [attr.id]="dataObject.ID">
+      <div class="container" #autoHeightElement #autoWidthElement>
+            <ng-template ngFor let-month [ngForOf]="months" let-i="index">
+                  <div *ngIf="((i > 0) && (i % columns === 0))" class="clearfix"></div>
+                  <div class="col"   
+                        [ngStyle]="{ 'width.px': imageDimensions, 'height.px': imageDimensions }"
+                        [ngClass]="{'selected': month.selected, 'enabled': month.enabled, 'disabled': !month.enabled}" 
+                        (click)="onClick(month, $event)"
+                        (touchstart)="onClick(month, $event)">
+                        <img  [ngStyle]="{ 'width.px': imageDimensions, 'height.px': imageDimensions }"
+                              [title]="month | json" 
+                              [src]="month.source" />
+                        <div class="text">{{month.text}}</div>
+                  </div>
+                  <div *ngIf="i == months.length-1" class="clearfix"></div>
+            </ng-template>
+      </div>
+</div>

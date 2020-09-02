@@ -1,0 +1,70 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "general-application": {
+            "root": "",
+            "sourceRoot": "src",
+            "projectType": "application",
+            "prefix": "app",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "styleext": "scss",
+                    "changeDetection": "OnPush",
+                    "entryComponent": true,
+                    "spec": false
+                },
+                "@schematics/angular:service": {
+                    "flat": false,
+                    "spec": false
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "showCircularDependencies":  false,
+                        "baseHref": "/{SurveyRoot}",
+                        "deployUrl": "/{SurveyRoot}/",
+                        "outputPath": "debug",
+                        "outputHashing": "all",
+                        "index": "src/default.aspx",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.json",
+                        "assets": [
+                            "src/favicon.ico",
+                            "src/assets",
+                            "src/scripts/modernizr.min.js"
+                        ],
+                        "styles": [
+                            "src/styles.scss"                            
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "outputPath": "dist",                            
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "sourceMap": false,
+                            "extractCss": false,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": true,
+                            "buildOptimizer": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "balls-and-bins"
+}

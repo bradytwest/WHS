@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="WomensHealthSurvey" Guid="1c97ce10-b2f0-46a9-85f5-74f293eaf913" ProjectType="DatamodelProject">
+  <MainFile RelativePath="true">WomensHealthSurvey.blax</MainFile>
+  <FileItems>
+    <File FileType="DatamodelFileType" RelativePath="true">WomensHealthSurvey.blax</File>
+    <File FileType="IncludeFileType" RelativePath="true">Type.incx</File>
+    <File FileType="PackageSpecificationFileType" RelativePath="true">WomensHealthSurvey.bcps</File>
+  </FileItems>
+  <Properties>
+    <IncludeSearchPath />
+    <LibrarySearchPath />
+    <DatamodelSearchPath />
+    <ResourceDB RelativePath="true">WomensHealthSurvey.blrd</ResourceDB>
+    <SupportedModes />
+    <UsedResourceSets />
+    <ConditionalDefines />
+    <ExternalSearchPath />
+    <SurveyRoot />
+    <CatiRole />
+    <IsRunnableSurvey>True</IsRunnableSurvey>
+    <WebDataEntryClient>MvcDebug</WebDataEntryClient>
+    <AppSupport />
+    <UseCari>False</UseCari>
+    <IgnoreLayoutErrors>False</IgnoreLayoutErrors>
+    <IgnoreRichtextErrors>False</IgnoreRichtextErrors>
+    <AddFieldGroupOrderInformation>False</AddFieldGroupOrderInformation>
+    <StartCondition />
+    <WriteInterceptorSetup />
+    <ActionsSetup />
+    <DownloadInterceptorSetup />
+  </Properties>
+</Project>

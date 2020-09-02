@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SolutionUserConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <DocumentWindows>
+    <OpenedFile>
+      <RelativeFileName>Type.incx</RelativeFileName>
+      <IsRelative>true</IsRelative>
+      <ViewTypeName>Include Editor</ViewTypeName>
+    </OpenedFile>
+    <OpenedFile>
+      <RelativeFileName>WomensHealthSurvey.blax</RelativeFileName>
+      <IsRelative>true</IsRelative>
+      <ViewTypeName>Source</ViewTypeName>
+    </OpenedFile>
+    <OpenedFile>
+      <RelativeFileName>WomensHealthSurvey.bcps</RelativeFileName>
+      <IsRelative>true</IsRelative>
+      <ViewTypeName>PackageSpecification</ViewTypeName>
+    </OpenedFile>
+  </DocumentWindows>
+  <ActiveFileName>WomensHealthSurvey.blax</ActiveFileName>
+  <FileName>C:\bl5proj\Calendar\Datamodel\WomensHealthSurvey\WomensHealthSurvey.bsol</FileName>
+  <ExpandedItems>
+    <SolutionItem>C:\bl5proj\Calendar\Datamodel\WomensHealthSurvey\WomensHealthSurvey.bproj</SolutionItem>
+  </ExpandedItems>
+  <SolutionExplorerSelectedItem>
+    <TreeFileType>File</TreeFileType>
+    <FileName>C:\bl5proj\Calendar\Datamodel\WomensHealthSurvey\WomensHealthSurvey.bcps</FileName>
+  </SolutionExplorerSelectedItem>
+  <ConfigurationMode>Development</ConfigurationMode>
+</SolutionUserConfig>

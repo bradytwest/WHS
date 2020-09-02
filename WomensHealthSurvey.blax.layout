@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutSpecification xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="WomensHealthSurvey" Version="10" GenerateAllSections="true" GenerateClientRules="true" UseGenericPages="true">
+  <Languages>
+    <Language Name="" />
+  </Languages>
+  <LayoutSets>
+    <LayoutSet Name="Large" ResourceSetName="Large" StyleName="Indigo" RequiredStyle="false" DesignHeight="768" DesignWidth="1024" ResizeMode="Auto" RouteItemsPerPage="1" RowsPerTable="999" ConditionAsString="Client.Width &gt; 780" ReceiptPageName="Default" IntroPageName="" AbortPageName="Default">
+      <InstanceLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q3">
+          <Instructions>
+            <TemplateInstruction TemplateName="SetQ3" TemplateTarget="Category" ObjectName="" />
+            <TemplateInstruction TemplateName="AnswerList" TemplateTarget="DataValue" Parameters="{ParameterValues IsStretched='True'}" />
+            <TemplateInstruction TemplateName="Default1" TemplateTarget="OtherCategory" Parameters="{ParameterValues TextVisibility='Collapsed';TextWidth='Stretch';IsStretched='True'}" ObjectName="opt21" />
+            <TemplateInstruction TemplateName="Default1" TemplateTarget="OtherCategory" Parameters="{ParameterValues TextVisibility='Collapsed';IsStretched='True';TextWidth='Stretch'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q4">
+          <Instructions>
+            <TemplateInstruction TemplateName="Months" TemplateTarget="Category" Parameters="{ParameterValues IsStretched='True'}" ObjectName="" />
+            <TemplateInstruction TemplateName="VerticalTopError" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='Stretch'}" />
+            <TemplateInstruction TemplateName="MonthSelector" TemplateTarget="ResponseValue" />
+            <TemplateInstruction TemplateName="SingleResponseValue" TemplateTarget="DataValue" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q6">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q5[].FIELD_Q5">
+          <Instructions>
+            <TemplateInstruction TemplateName="SingleResponseValue" TemplateTarget="DataValue" />
+            <TemplateInstruction TemplateName="MonthSelector" TemplateTarget="ResponseValue" Parameters="{ParameterValues MonthSelectorCheckmarksForSelected='True';MonthSelectorSelectedMonths={Expression SelectedMonths.ValueAsText}}" />
+            <TemplateInstruction TemplateName="VerticalTopError" TemplateTarget="FieldPane" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q1">
+          <Instructions>
+            <TemplateInstruction Locator="Before" TemplateName="New_Default" TemplateTarget="MasterPage" />
+            <TemplateInstruction TemplateName="Vertical" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='Stretch'}" />
+            <TemplateInstruction TemplateName="DateControl" TemplateTarget="ResponseValue" Parameters="{ParameterValues Appearance='DatePicker'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q2">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Methods">
+          <Instructions>
+            <TemplateInstruction TemplateName="Default" TemplateTarget="OtherSpecify" Parameters="{ParameterValues IsStretched='True'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q3_Specify">
+          <Instructions>
+            <TemplateInstruction TemplateName="StringTextBoxSpec" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='300'}" />
+            <TemplateInstruction TemplateName="OtherCategory" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='Stretch'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q7">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Qexit">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="New_Exit2" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Qexit1">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="New_Exit" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q1Intro">
+          <Instructions>
+            <TemplateInstruction Locator="Before" TemplateName="New_Default" TemplateTarget="MasterPage" />
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q8">
+          <Instructions>
+            <TemplateInstruction TemplateName="OpenTextBox" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='Stretch'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QGender">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Width='200';HorizontalAlignment='Left';Margin='0,6,0,6'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,10';HorizontalAlignment='Left';Width='200'}" ObjectName="Female" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,20,0,6';Width='200'}" ObjectName="Male" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QHisp">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Gender">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="OtherSpecify" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QGender_Spec">
+          <Instructions>
+            <TemplateInstruction TemplateName="StringTextBoxSpec" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='200'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QConsent">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="Consent" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QRace">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Width='220';Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+      </InstanceLayoutInstructions>
+      <Parallels>
+        <Parallel Name="">
+          <IsGeneric>false</IsGeneric>
+        </Parallel>
+        <Parallel Name="PRIMARY">
+          <IsGeneric>false</IsGeneric>
+        </Parallel>
+      </Parallels>
+    </LayoutSet>
+    <LayoutSet Name="Small" ResourceSetName="Small" StyleName="Indigo" RequiredStyle="false" DesignHeight="640" DesignWidth="480" ResizeMode="Auto" RouteItemsPerPage="1" RowsPerTable="999" ConditionAsString="Client.Width &lt;= 515" ReceiptPageName="Default" IntroPageName="" AbortPageName="Default">
+      <InstanceLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q4">
+          <Instructions>
+            <TemplateInstruction TemplateName="Months" TemplateTarget="Category" Parameters="{ParameterValues IsStretched='True'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Months" TemplateTarget="Category" ObjectName="opt1" />
+            <TemplateInstruction TemplateName="SingleResponseValue" TemplateTarget="DataValue" />
+            <TemplateInstruction TemplateName="MonthSelector" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='Auto'}" />
+            <TemplateInstruction TemplateName="VerticalTopError" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='Stretch'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q3">
+          <Instructions>
+            <TemplateInstruction TemplateName="ButtonWithHelp" TemplateTarget="Category" Parameters="{ParameterValues AutoEnter='True';Height='60';Margin='0,3,0,3';Width='200'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="opt21" />
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q5[].FIELD_Q5">
+          <Instructions>
+            <TemplateInstruction TemplateName="MonthSelector" TemplateTarget="ResponseValue" Parameters="{ParameterValues MonthSelectorCheckmarksForSelected='True';MonthSelectorSelectedMonths={Expression SelectedMonths.ValueAsText};Width='Auto'}" />
+            <TemplateInstruction TemplateName="SingleResponseValue" TemplateTarget="DataValue" />
+            <TemplateInstruction TemplateName="VerticalTopError" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='Stretch'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q6">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q1">
+          <Instructions>
+            <TemplateInstruction Locator="Before" TemplateName="New_Default1" TemplateTarget="MasterPage" />
+            <TemplateInstruction TemplateName="Vertical" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='330'}" />
+            <TemplateInstruction TemplateName="DateControl" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='Auto'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q2">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+            <TemplateInstruction TemplateName="AnswerList" TemplateTarget="DataValue" Parameters="{ParameterValues HorizontalAlignment='Center';Width='Auto'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Methods">
+          <Instructions>
+            <TemplateInstruction TemplateName="Default" TemplateTarget="OtherSpecify" Parameters="{ParameterValues IsStretched='True'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q3_Specify">
+          <Instructions>
+            <TemplateInstruction TemplateName="OtherCategory" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='200'}" />
+            <TemplateInstruction TemplateName="StringTextBoxSpec" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='197'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q7">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+            <TemplateInstruction TemplateName="AnswerList" TemplateTarget="DataValue" Parameters="{ParameterValues HorizontalAlignment='Center';Width='Auto'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Qexit">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="New_Exit2" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Qexit1">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="New_Exit" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q1Intro">
+          <Instructions>
+            <TemplateInstruction Locator="Before" TemplateName="New_Default1" TemplateTarget="MasterPage" />
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QGender">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Width='200'}" ObjectName="Male" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Width='200'}" ObjectName="Female" />
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="" />
+            <TemplateInstruction TemplateName="ButtonWithHelp" TemplateTarget="Category" Parameters="{ParameterValues Width='200'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Gender">
+          <Instructions>
+            <TemplateInstruction TemplateName="Default" TemplateTarget="OtherSpecify" Parameters="{ParameterValues IsStretched='True'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QGender_Spec">
+          <Instructions>
+            <TemplateInstruction TemplateName="StringTextBoxSpec" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='197';HorizontalAlignment='Center';IsStretched='False'}" />
+            <TemplateInstruction TemplateName="OtherCategory" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='200'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QHisp">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+            <TemplateInstruction TemplateName="AnswerList" TemplateTarget="DataValue" Parameters="{ParameterValues HorizontalAlignment='Center';Width='Auto'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QRace">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Width='220';Height='60';Margin='0,6,0,6'}" ObjectName="" />
+            <TemplateInstruction TemplateName="AnswerList" TemplateTarget="DataValue" Parameters="{ParameterValues HorizontalAlignment='Center';Width='Auto'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QConsent">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="Consent" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+      </InstanceLayoutInstructions>
+      <Parallels>
+        <Parallel Name="">
+          <IsGeneric>false</IsGeneric>
+        </Parallel>
+        <Parallel Name="PRIMARY">
+          <IsGeneric>false</IsGeneric>
+        </Parallel>
+      </Parallels>
+    </LayoutSet>
+    <LayoutSet Name="Medium" ResourceSetName="Medium" StyleName="Indigo" RequiredStyle="false" DesignHeight="1024" DesignWidth="768" ResizeMode="Auto" RouteItemsPerPage="1" RowsPerTable="999" ConditionAsString="Client.Width &gt; 515 AND Client.Width &lt;= 780" ReceiptPageName="Default" IntroPageName="" AbortPageName="Default">
+      <InstanceLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q1Intro">
+          <Instructions>
+            <TemplateInstruction Locator="Before" TemplateName="New_Default" TemplateTarget="MasterPage" />
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" Parameters="{ParameterValues Margin='5,25,5,25'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q2">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" ObjectName="Yes" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q3">
+          <Instructions>
+            <TemplateInstruction TemplateName="ButtonWithHelp" TemplateTarget="Category" Parameters="{ParameterValues Height='60';Width='200';Margin='0,3,0,3';HorizontalAlignment='Left'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="opt21" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q4">
+          <Instructions>
+            <TemplateInstruction TemplateName="VerticalTopError" TemplateTarget="FieldPane" />
+            <TemplateInstruction TemplateName="SingleResponseValue" TemplateTarget="DataValue" />
+            <TemplateInstruction TemplateName="MonthSelector" TemplateTarget="ResponseValue" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q5[].FIELD_Q5">
+          <Instructions>
+            <TemplateInstruction TemplateName="VerticalTopError" TemplateTarget="FieldPane" />
+            <TemplateInstruction TemplateName="SingleResponseValue" TemplateTarget="DataValue" />
+            <TemplateInstruction TemplateName="MonthSelector" TemplateTarget="ResponseValue" Parameters="{ParameterValues MonthSelectorSelectedMonths={Expression SelectedMonths.ValueAsText};MonthSelectorCheckmarksForSelected='True'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q6">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" Parameters="{ParameterValues Margin='5,25,5,25'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q7">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Qexit">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" Parameters="{ParameterValues Margin='5,25,5,25'}" />
+            <TemplateInstruction Locator="Before" TemplateName="New_Exit2" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Qexit1">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" Parameters="{ParameterValues Margin='5,25,5,25'}" />
+            <TemplateInstruction Locator="Before" TemplateName="New_Exit" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q3_Specify">
+          <Instructions>
+            <TemplateInstruction TemplateName="StringTextBoxSpec" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='197'}" />
+            <TemplateInstruction TemplateName="OtherCategory" TemplateTarget="FieldPane" Parameters="{ParameterValues Width='200'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Methods">
+          <Instructions>
+            <TemplateInstruction TemplateName="DefaultMed" TemplateTarget="OtherSpecify" Parameters="{ParameterValues IsStretched='True'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Gender">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="OtherSpecify" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QHisp">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QGender">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button2" TemplateTarget="OtherCategory" Parameters="{ParameterValues OtherCategoryWidth='200'}" ObjectName="Other" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Width='200';Margin='0,6,0,6'}" ObjectName="" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,10';Width='200'}" ObjectName="Female" />
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,20,0,6';Width='200'}" ObjectName="Male" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QGender_Spec">
+          <Instructions>
+            <TemplateInstruction TemplateName="StringTextBoxSpec" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='200'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QConsent">
+          <Instructions>
+            <TemplateInstruction TemplateName="QuestionTextOnly" TemplateTarget="FieldPane" />
+            <TemplateInstruction Locator="Before" TemplateName="Consent" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="QRace">
+          <Instructions>
+            <TemplateInstruction TemplateName="Button" TemplateTarget="Category" Parameters="{ParameterValues Margin='0,6,0,6';Width='220'}" ObjectName="" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q8">
+          <Instructions>
+            <TemplateInstruction TemplateName="OpenTextBox" TemplateTarget="ResponseValue" Parameters="{ParameterValues Width='Stretch'}" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+        <RouteItemLayoutInstructions RouteItemName="Q1">
+          <Instructions>
+            <TemplateInstruction Locator="Before" TemplateName="New_Default" TemplateTarget="MasterPage" />
+          </Instructions>
+        </RouteItemLayoutInstructions>
+      </InstanceLayoutInstructions>
+      <Parallels>
+        <Parallel Name="">
+          <IsGeneric>false</IsGeneric>
+        </Parallel>
+        <Parallel Name="PRIMARY">
+          <IsGeneric>false</IsGeneric>
+        </Parallel>
+      </Parallels>
+    </LayoutSet>
+  </LayoutSets>
+  <LayoutSetGroups>
+    <LayoutSetGroup Name="Interviewing" DataEntrySettingsName="StrictInterviewing">
+      <LayoutSetNames>
+        <string>Large</string>
+        <string>Small</string>
+        <string>Medium</string>
+      </LayoutSetNames>
+    </LayoutSetGroup>
+  </LayoutSetGroups>
+  <RoleReferences>
+    <RoleReference Name="Help" MappedTextRole="Help" />
+    <RoleReference Name="Watermark" MappedTextRole="Watermark" />
+    <RoleReference Name="ToolTip" MappedTextRole="ToolTip" />
+    <RoleReference Name="SpecialAnswer" />
+    <RoleReference Name="CategoryGroup" />
+    <RoleReference Name="EditMask" />
+    <RoleReference Name="Hint" MappedTextRole="Hint" />
+  </RoleReferences>
+  <TypeReferences>
+    <TypeReference Name="THeader" />
+    <TypeReference Name="TCurrency" />
+  </TypeReferences>
+  <LayoutSpecFieldReferences xmlns="layoutspec">
+    <LayoutSpecFieldReference Name="RespondentTimeZone" />
+    <LayoutSpecFieldReference Name="RespondentTime" />
+    <LayoutSpecFieldReference Name="MainSurveyName" />
+    <LayoutSpecFieldReference Name="InstrumentID" />
+    <LayoutSpecFieldReference Name="InterviewerID" />
+    <LayoutSpecFieldReference Name="CaseID" />
+    <LayoutSpecFieldReference Name="SelectedMonths" MappedDatamodelField="Q4" />
+    <LayoutSpecFieldReference Name="SelectedMonthsStartDate" MappedDatamodelField="SelectedMonthsStartDate" />
+    <LayoutSpecFieldReference Name="Q4" />
+    <LayoutSpecFieldReference Name="AID" MappedDatamodelField="AID" />
+    <LayoutSpecFieldReference Name="SampleID" />
+    <LayoutSpecFieldReference Name="ID" MappedDatamodelField="ID" />
+    <LayoutSpecFieldReference Name="ExitStatus" MappedDatamodelField="ExitStatus" />
+    <LayoutSpecFieldReference Name="ExitText" MappedDatamodelField="ExitText" />
+    <LayoutSpecFieldReference Name="RedirectURI" MappedDatamodelField="RedirectURI" />
+    <LayoutSpecFieldReference Name="Consent" MappedDatamodelField="QConsent" />
+  </LayoutSpecFieldReferences>
+</LayoutSpecification>

@@ -1,0 +1,8 @@
+﻿{
+  "serverpark": "$(ServerPark)",
+  "instrumentid": "$(InstrumentId)",
+  "instrumentname": "",
+  "measurepagetimes": false,
+  "ispreview": $(IsPreview),
+  "istesting": false
+}

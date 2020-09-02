@@ -1,0 +1,807 @@
+﻿{*********************************************************}
+{	            Womens Health Study                        }
+{                   Main - Full                           }
+{                Blaise 5.6.5.2055                        }
+{			Main Application Control File (Blax)	          }
+{PROGRAMMER: Colette Keyser/CBS	                         }
+{CREATED:	 09/11/2019                                   }
+{MODIFIED:	 11/07/2019	                                  }
+{COPYRIGHT 2019 The Regents of The University of Michigan }
+{*********************************************************}
+
+
+DATAMODEL WomensHealthSurvey "Women's Health Study"
+
+PRIMARY 
+   ID
+
+ROLES = HINT "A short explanatory text",
+        HELP "A comprehensive instruction for the respondent",
+        TOOLTIP "TOOLTIP",
+        ANSWERINFO "",
+        MethodHelp,
+        Template, 
+        Watermark
+
+LOCALS
+   i : integer
+   m : integer
+   
+
+AUXFIELDS
+   xTime           : TIMETYPE
+   xDate           : DATETYPE
+   xTimeGate       : 1..2
+   auxOpt: array[1..22] of STRING[60]
+   auxOpt2: array[1..22] of STRING[60]
+   auxOptInfo: array[1..20] of STRING[500]   
+   auxMonthString: ARRAY[1..24] of string[20]
+   
+   auxCalculatedDate: datetype
+   auxCalculatedMonth: 1..12
+   auxCalculatedYear: 1900..2100
+   auxTotalMethods: 1..22   
+   
+   Q6_FILL: STRING[10000]
+   
+   
+   
+INCLUDE "Type.incx"   
+
+FUNCTION getMonthName : STRING
+   PARAMETERS
+      i: integer
+      startDate: datetype
+   AUXFIELDS
+      fAuxCalculatedDate: datetype
+      fAuxCalculatedMonth: 1..12
+      fAuxCalculatedYear: 1900..2100      
+   RULES
+      fAuxCalculatedDate := startDate - (0,i,0)
+      fAuxCalculatedMonth := month(fAuxCalculatedDate)
+      fAuxCalculatedYear := year(fAuxCalculatedDate)
+      if fAuxCalculatedMonth = 1 then RESULT := 'January ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 2 then RESULT := 'February ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 3 then RESULT := 'March ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 4 then RESULT := 'April ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 5 then RESULT := 'May ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 6 then RESULT := 'June ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 7 then RESULT := 'July ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 8 then RESULT := 'August ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 9 then RESULT := 'September ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 10 then RESULT := 'October ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 11 then RESULT := 'November ' + str(fAuxCalculatedYear) endif
+      if fAuxCalculatedMonth = 12 then RESULT := 'December ' + str(fAuxCalculatedYear) endif               
+ENDFUNCTION
+   
+
+Procedure getDateTimeStr
+   parameters
+      Import _date : datetype
+      Import _time : Timetype
+      Export _dateTime  : string
+   RULES
+      _dateTime := DATETOSTR (_date, 'yyyy') + '-' +
+                          DATETOSTR (_date, 'MM') + '-' +
+                          DATETOSTR (_date, 'dd') + ' ' + 
+                          TIMETOSTR (_time, 'HH') + ':' +
+                          TIMETOSTR (_time, 'mm') + ':' +
+                          TIMETOSTR (_time, 'ss') + '.' +
+                          TIMETOSTR (_time, 'fff') + ' ' +
+                          TIMETOSTR (_time, 'zzz')       
+EndProcedure 
+
+
+BLOCK BQ5
+   PARAMETERS
+      i: INTEGER
+   
+   
+   AUXFIELDS
+      xBQ5Fill : STRING
+   
+   FIELDS
+      
+      FIELD_Q5         (FIELD_Q5)
+                       "In which months, if any, ^xBQ5Fill?"
+                       HINT "Green shading indicates months you mentioned having sexual intercourse with a man. 
+                       You are not limited to choosing only those months when answering this question." /
+                       "Months used":
+
+                       SET OF TMonths, EMPTY
+      
+           
+         
+      RULES
+         xBQ5Fill.keep
+         IF auxOpt[i] = 'Birth control pills' THEN
+            xBQ5Fill := 'were you using birth control pills'
+         
+         ELSEIF auxOpt[i] = 'Condom' THEN
+            xBQ5Fill := 'did your partner use a condom'  
+            
+         ELSEIF auxOpt[i] = 'Vasectomy' THEN
+            xBQ5Fill := 'were you with a partner who had a vasectomy'
+            
+         ELSEIF auxOpt[i] = 'Female Sterilization operation' THEN
+            xBQ5Fill := 'was your female sterilization operation in effect'
+            
+         ELSEIF auxOpt[i] = 'Depo-Provera® or injectable' THEN
+            xBQ5Fill := 'were you using Depo-Provera® or another injectable'
+            
+         ELSEIF auxOpt[i] = 'Withdrawal or “pulling out”' THEN
+            xBQ5Fill := 'did you and your partner use the withdrawal or \"pulling out\" method'
+            
+         ELSEIF auxOpt[i] = 'Calendar rhythm,  Standard Days, or Cycle Beads method' THEN
+            xBQ5Fill := 'did you use the calendar rhythm, standard days, or cycle beads method'
+            
+         ELSEIF auxOpt[i] = 'Safe period by temperature or cervical mucus test' THEN
+            xBQ5Fill := 'did you use the safe period by temperature or cervical mucus test'
+            
+         ELSEIF auxOpt[i] = 'Contraceptive patch' THEN
+            xBQ5Fill := 'were you using a contraceptive patch'
+         
+         ELSEIF auxOpt[i] = 'Vaginal contraceptive ring (or NuvaRing®)' THEN
+            xBQ5Fill := 'were you using a vaginal contraceptive ring (or NuvaRing TM)'
+            
+         ELSEIF auxOpt[i] = 'Emergency contraception' THEN
+            xBQ5Fill := 'did you use emergency contraception'
+            
+         ELSEIF auxOpt[i] = 'Hormonal implants' THEN
+            xBQ5Fill := 'were you using hormonal implants'
+         
+         ELSEIF auxOpt[i] = 'Diaphragm' THEN
+            xBQ5Fill := 'did you use a diaphragm'
+         
+         ELSEIF auxOpt[i] = 'Female condom, vaginal pouch' THEN
+            xBQ5Fill := 'did you use a female condom or vaginal pouch'
+            
+         ELSEIF auxOpt[i] = 'Foam' THEN
+            xBQ5Fill := 'did you use foam'
+            
+         ELSEIF auxOpt[i] = 'Jelly or cream (other than with a diaphragm)' THEN
+            xBQ5Fill := 'did you use jelly or cream (other than with a diaphragm)' 
+            
+         ELSEIF auxOpt[i] = 'Cervical cap' THEN
+            xBQ5Fill := 'did you use a cervical cap' 
+            
+         ELSEIF auxOpt[i] = 'Suppository, insert' THEN
+            xBQ5Fill := 'did you use a suppository or insert' 
+            
+         ELSEIF auxOpt[i] = 'Today™ sponge' THEN
+            xBQ5Fill := 'did you use a Today™ sponge' 
+            
+         ELSEIF auxOpt[i] = 'IUD, coil, loop' THEN
+            xBQ5Fill := 'did you use an IUD, coil, or loop' 
+            
+         ELSEIF auxOpt[i] = 'Other method:' THEN
+            xBQ5Fill := 'did you use this method ('+Q3_Specify+')'  {need wording from Gregg} 
+                                                      
+         ELSEIF auxOpt[i] = 'Never used a contraceptive method' THEN
+            xBQ5Fill := 'did you use any birth control method'                   
+         
+         ENDIF 
+         
+         
+         FIELD_Q5.ask
+         SIGNAL 
+         IF FIELD_Q5 = Empty THEN
+            ERROR "You did not select any months. You can leave it empty or make changes now. When you are ready, click/tap \"Okay\" and then <img src=arrowSmall> to continue"
+         ENDIF
+ENDBLOCK
+
+FIELDS
+
+  ID (ID) "SAMPLEID FOR THIS CASE" : STRING, NOEMPTY, NODK, NORF     
+     
+  AID : STRING
+  
+  {Multiplier : REAL}
+  
+  SelectedMonthsStartDate:datetype
+  
+  
+  
+   VersionDate     (VersionDate) / "Application Version Date"   : DATETYPE
+
+   VersionTime     (VersionTime) / "Application Version Time"   : TIMETYPE
+
+   ContactAttemptDate  (ContactAttemptDate) / "IW Session Date" : DATETYPE
+   ContactAttemptTime  (ContactAttemptTime) / "IW Session Time" : TIMETYPE
+ 
+   SurveyStartDate     : datetype
+   SurveyStartTime     : timetype
+   SurveyEndDate       : datetype
+   SurveyEndTime       : timetype
+   SessionStartDate    : datetype
+   SessionStartTime    : timetype
+   SessionEndDate      : datetype
+   SessionEndTime      : timetype
+   InstrumentStartDate : datetype
+   InstrumentStartTime : timetype      
+   InstrumentEndTime   : timetype
+   InstrumentEndDate   : DateType
+    
+   SurveyStarted : 0..1
+   SurveyEnded : 0..1
+   
+   SessionStartDateTime  (SessionStartDateTime) / "Session Start date/time"          : STRING[30]
+   SessionEndDateTime  (SessionEndDateTime) / "Session End date/time"                : STRING[30]
+   InstrumentStartDateTime  (InstrumentStartDateTime) / "Instrument Start date/time" : STRING[30]
+   InstrumentEndDateTime  (InstrumentEndDateTime) / "Instrument End date/time"       : STRING[30]
+   SurveyStartDateTime  (SurveyStartDateTime) / "Survey Start date/time"             : STRING[30]
+   SurveyEndDateTime  (SurveyEndDateTime) / "Survey End date/time"                   : STRING[30]
+   
+   
+   CurrentSecs     (CurrentSecs) / "Current Seconds"            : INTEGER[15], NODK, NORF
+   TotalSecs       (TotalSecs)   / "Total Seconds"              : INTEGER[15], NODK, NORF
+   TotalMins       (TotalMins)   / "Total Minutes"              : 0.00..60000.00, NODK, NORF
+   SurveySecs                                                   : Integer
+   SurveyMins                                                   : Integer
+   IWCurrDate      (IWCurrDate)  / "Interview Current Date"     : DATETYPE, NODK, NORF
+   
+   
+   IWComplete      (IWComplete)
+                   "<IWER>You have reached the end of the Interview
+                   <newline><newline>ENTER [1] to complete</instruct>" /
+                   "Interview Complete" :
+                   {TComplete, NOEMPTY, NODK, NORF}
+                   TComplete, NODK, NORF
+             
+
+   Complete        (Complete)  "Complete Var for ST"       / "Complete Var for ST"     : (Done, NotDone), NODK, NORF
+                    
+   InstrumentComplete : INTEGER
+   
+   ActiveFieldName : STRING
+  
+  
+   ExitText : STRING
+   
+   ExitStatus : INTEGER
+   
+   RedirectURI : STRING
+  
+  
+  
+   xBtnFill "<White>Edit</White>" : STRING
+   
+   
+   QConsent         (QConsent)
+                    "<Center><bold>University of Michigan Consent To Be Part of A Research Study</bold>
+                    <newline><Center>Study Title: Women’s Health Study
+                    <newline><Center>Principal Investigator: William G. Axinn, Research Professor, University of Michigan
+                    <newline><left>
+                    <table><column width=30><column width='*'>                    
+                    <row><cell><img src=Bullet></cell><cell>You are invited to participate in a research study about women’s health and fertility.</cell></row> 
+                    <row><cell><img src=Bullet></cell><cell>If you choose to participate it will take approximately 5 minutes. You may find it shorter or longer 
+                    depending on your circumstances.</cell></row>
+                    
+                    <row><cell><img src=Bullet></cell><cell>Any information you provide is voluntary and confidential. You may choose to not answer any question or 
+                    stop at any time. There is little to no risk in participating since you will be anonymous.</cell></row> 
+                    
+                    <row><cell><img src=Bullet></cell><cell>You may not receive any personal benefits from being in this study. However, others may benefit from the 
+                    knowledge gained from this study.</cell></row>
+                    
+                    <row><cell><img src=Bullet></cell><cell>After completion of the study, you will receive compensation in the amount you have agreed to with the 
+                    platform through which you entered this survey.</cell></row>
+                                        
+                    <row><cell><img src=Bullet></cell><cell>If you have any question about this research study, please contact: womenshealthstudy@umich.edu or 877-556-1542.</cell></row>
+                    
+                    <row><cell><img src=Bullet></cell><cell>The University of Michigan Institutional Review Board Health and Behavioral Sciences has determined 
+                    that this study is exempt from IRB oversight.</cell></row>
+                    </table>
+                    <newline>By clicking   <img src=arrowSm>   you are consenting to participate.
+                    <newline>" /
+                    "Intro":
+
+                    TContinue, EMPTY   
+   
+   
+   
+   
+   Q1Intro          (Q1Intro)
+                    "You’ve been chosen to participate in a very short survey about women’s health and 
+                    fertility by researchers at the University of Michigan’s Institute for Social Research. 
+                    The information we collect will remain confidential and be used only for research purposes. 
+                    No individually identifying data will be available to researchers." /
+                    "Intro":
+
+                    TContinue, EMPTY   
+
+
+   Q1               (Q1)
+                    "What is the date of your birth?" /
+                    "DOB":
+
+                    DateType, EMPTY    
+                                   
+
+GROUP Gender
+
+Template "OTHERSPECIFY"
+
+FIELDS  
+
+   QGender          (QGender)
+                    "How would you describe your gender?" /
+                    "Gender":
+
+                    TSex, EMPTY  
+                    
+   QGender_Spec     (QGender_Spec)
+                    ""
+                    Watermark "Please specify"/
+                    "":
+                    STRING[50], EMPTY                      
+   
+
+
+RULES
+   QGender
+   IF QGender = Other THEN
+      QGender_Spec
+   ENDIF 
+   
+   
+ENDGROUP {Gender}
+
+FIELDS    
+   
+   
+   QHisp            (QHisp)
+                    "Are you Hispanic or Latina, or of Spanish origin?" /
+                    "Hispanic origin":
+
+                    TYesNo, EMPTY
+
+
+   QRace            (QRace)
+                    "What is your race?  Please select all that apply." /
+                    "Race":
+
+                    SET OF TRace, EMPTY
+
+   
+   RaceEthnicity : TRaceEthn
+      
+   
+   Q2               (Q2)
+                    "At any time in your life, have you ever had sexual intercourse with a man, that is, made love, had sex, or gone all the way?"
+                    HINT "Do not count oral sex, anal sex, heavy petting, or other forms of sexual activity that do not involve vaginal 
+                    penetration. Do not count sex with a female partner." /
+                    "Ever had intercourse":
+
+                    TYesNo, EMPTY   
+
+
+GROUP Methods
+
+Template "OTHERSPECIFY"
+
+FIELDS   
+   
+   Q3               (Q3)
+                    "There are a variety of methods that some people use to prevent pregnancy or to prevent sexually transmitted disease. 
+                    For each method shown, please indicate if you or a partner has ever used it for any reason, even if only once."
+                    HINT "You can tap/click the \"?\" to get more information about each method shown." /
+                    "Methods used":
+
+                    SET OF TMethods, EMPTY    
+
+
+   Q3_Specify       (Q3_Specify) 
+                    ""
+                    Watermark "Please specify"/
+                    "":
+                    STRING[50], EMPTY
+ 
+ 
+RULES
+   Q3
+   IF Opt21 IN Q3 THEN
+      Q3_Specify
+   ENDIF 
+   
+   
+ENDGROUP {Methods}
+
+FIELDS   
+   
+   
+   Q4               (Q4)
+                    "In the past 24 months, in which months, if any, did you have sexual intercourse with a man?"
+                    HINT "Touch or click the calendar icons to select months. You may indicate a range of months by first selecting the beginning month and then 
+                    double-clicking the ending month in the range." /
+                    "Months used":
+
+                    SET OF TMonths, EMPTY      
+  
+  
+  
+      
+   Q5 : ARRAY[1..22] OF BQ5  
+     
+  
+   Q6               (Q6)
+                    "These are the methods of contraception and months of use we’ve recorded. If you’d like to make a correction, 
+                    please click the \"Edit\" button next to the method or methods that need to be corrected and then select <img src=arrowSm> to continue. 
+                    If you have no corrections, just select <img src=arrowSm>.
+                    <br/><br/>^{Q6_FILL}" /
+                    "Corrections":
+
+                    STRING[1], EMPTY
+
+
+
+   Q7               (Q7)
+                    "Please indicate your level of agreement with this statement: This survey was easy to complete." /
+                    "Debrief":
+
+                    TAgree
+
+
+   Q8               (Q8)
+                    "Please let us know what else we might do to make this survey easier for others to complete." /
+                    "Comments":
+
+                    OPEN, EMPTY
+
+
+
+   Qexit            (Qexit)
+                    "That’s all the questions we have for you. Thank you." /
+                    "Exit":
+
+                    TContinue, EMPTY
+                    
+                    
+                    
+   Qexit1           (Qexit1)
+                    "In this survey we are only interviewing women who are between the ages of 18 and 49. That’s all the questions we have for you. Thank you." /
+                    "Exit - DOB ineligible":
+
+                    TContinue, EMPTY                    
+  
+  {Q6 "These are the methods of contraception and months of use we’ve recorded. If you’d like to make a correction, please select the “Edit” button next to the method or methods that need to be corrected and then select Next to continue . If you have no corrections, just select Next.<br/><br/>^{Q6_FILL}" : STRING[1], EMPTY}
+
+Rules   
+
+   ID.keep
+   AID.keep
+   AID := ID
+   
+   ExitText.KEEP
+   ExitStatus.KEEP
+   RedirectURI.KEEP
+
+   // set the content of the categories and its description
+   auxOpt[1] := 'Birth control pills'                                            auxOptInfo[1] := 'Also called the pill, oral contraceptives, OCs. A series of pills taken orally (by mouth) for 21 to 28 days of the menstrual cycle.  Pills are used to help women prevent pregnancy. They can also be used to regulate menstrual periods, help relieve pain from cramps, or to treat acne.'
+   auxOpt[2] := 'Condom'                                                         auxOptInfo[2] := 'Also called rubbers. Latex or rubber covering placed tightly over the penis during sex.  These form a barrier between the penis and the woman’s vagina.  Used to prevent pregnancy and to protect against sexually transmitted diseases, such as herpes and AIDS.'
+   auxOpt[3] := 'Vasectomy'                                                      auxOptInfo[3] := 'Male sterilization. An operation performed on the man to cause sterility by cutting or removing part of the male sperm duct (vans deferens) so that sperm can no longer pass through.'
+   auxOpt[4] := 'Female Sterilization operation'                                 auxOptInfo[4] := 'such as tubal sterilization or hysterectomy '
+   auxOpt[5] := 'Depo-Provera® or injectable'                                    auxOptInfo[5] := 'A shot or injection of a hormone (progestin) or hormones (estrogen and progestin) that is given every 3 months to prevent pregnancy.  Also known as "Depo".'
+   auxOpt[6] := 'Withdrawal or “pulling out”'                                    auxOptInfo[6] := 'Also called coitus interruptus.  The man removes his penis from the woman’s vagina before he ejaculates.'
+   auxOpt[7] := 'Calendar rhythm,  Standard Days, or Cycle Beads method'         auxOptInfo[7] := 'With these methods, a woman counts the days in her menstrual cycle to identify which days she can get pregnant, or “unsafe” days.'
+   auxOpt[8] := 'Safe period by temperature or cervical mucus test'              auxOptInfo[8] := 'A woman’s fertile period is determined by using a thermometer to check her temperature and by looking at the consistency of her cervical mucus.  The woman then abstains from sexual intercourse during her fertile period.'
+   auxOpt[9] := 'Contraceptive patch'                                            auxOptInfo[9] := 'Also called Ortho-Evra.  A patch about the size of a half-dollar that is worn on the upper- outer arm, the torso, the abdomen, or the buttocks, to prevent pregnancy.  The patch is removed and replaced every seven days for a total of 21 days.  The patch contains the same hormones found in oral contraceptives, but they are absorbed through the skin.'
+   auxOpt[10] := 'Vaginal contraceptive ring (or NuvaRing®)'                     auxOptInfo[10] := 'A clear, flexible 2-inch ring that is inserted into the vagina and left there for 3 weeks.  Low doses of hormones that prevent pregnancy are continuously released into the body.'
+   auxOpt[11] := 'Emergency contraception'                                       auxOptInfo[11] := 'This is a series of regular birth control pills taken within 72 hours, or within 5 days, after unprotected sex to help a woman avoid pregnancy.  Some examples of names for this are: “Plan B™”, “Preven™”, “Ella™”, “Next Choice™”, or “Morning After” pills. Additional names include “Take Action” and “My Way”.'
+   auxOpt[12] := 'Hormonal implants'                                             auxOptInfo[12] := 'NorplantTM or ImplanonTM):  Small matchstick-like rods (of progestin) inserted under the skin of a woman’s arm, usually performed by a doctor or nurse.  Protects against pregnancy for five years, or until the rods are removed.'
+   auxOpt[13] := 'Diaphragm'                                                     auxOptInfo[13] := 'A latex rubber device inserted into the vagina to cover the cervix to block the entry of sperm into the uterus during sex.  Used with spermicidal jelly or cream.'
+   auxOpt[14] := 'Female condom, vaginal pouch'                                  auxOptInfo[14] := 'A loose fitting lining with a flexible ring at both ends that is used before sex to block the entry of sperm into the uterus.   Used to prevent pregnancy and to protect against sexually transmitted diseases.'
+   auxOpt[15] := 'Foam'                                                          auxOptInfo[15] := 'A spermicidal foaming substance inserted in the vagina before sex to prevent pregnancy or to help protect against disease.'
+   auxOpt[16] := 'Jelly or cream (other than with a diaphragm)'                  auxOptInfo[16] := 'A spermicidal gel or thick creamy substance used in the vagina during sex to prevent pregnancy or to help protect against disease.'
+   auxOpt[17] := 'Cervical cap'                                                  auxOptInfo[17] := 'A small latex rubber device inserted in the vagina and placed over the cervix before sex to block the entry of sperm into the uterus.  Similar to a diaphragm.  May be used with or without spermicide.'
+   auxOpt[18] := 'Suppository, insert'                                           auxOptInfo[18] := 'A tablet, capsule, or solid substance that dissolves in the vagina to produce a spermicidal foam or cream.  It is inserted prior to sex to prevent pregnancy.  May also help protect against disease.'
+   auxOpt[19] := 'Today™ sponge'                                                 auxOptInfo[19] := 'The brand name of a vaginal contraceptive, this disposable foam sponge is inserted in the vagina before sex and covers the cervix.  It is a disposable, soft sponge that contains a spermicide that foams when moistened with water.'
+   auxOpt[20] := 'IUD, coil, loop'                                               auxOptInfo[20] := 'Intra-uterine device, also called intra-uterine contraceptive device (IUCD).  A plastic or copper and plastic device inserted by a medical person into the uterus to prevent pregnancy.'   
+   auxOpt[21] := 'Other method:' 
+   auxOpt[22] := 'Never used a contraceptive method' 
+   // 
+
+   
+   
+   auxOpt2[1] := 'Birth control pills'                                            
+   auxOpt2[2] := 'Condom'                                                         
+   auxOpt2[3] := 'Vasectomy'                                                      
+   auxOpt2[4] := 'Female Sterilization operation'                                 
+   auxOpt2[5] := 'Depo-Provera® or injectable'                                    
+   auxOpt2[6] := 'Withdrawal or “pulling out”'                                    
+   auxOpt2[7] := 'Calendar rhythm,  Standard Days, or Cycle Beads method'         
+   auxOpt2[8] := 'Safe period by temperature or cervical mucus test'              
+   auxOpt2[9] := 'Contraceptive patch'                                            
+   auxOpt2[10] := 'Vaginal contraceptive ring (or NuvaRing®)'                     
+   auxOpt2[11] := 'Emergency contraception'                                       
+   auxOpt2[12] := 'Hormonal implants'                                             
+   auxOpt2[13] := 'Diaphragm'                                                     
+   auxOpt2[14] := 'Female condom, vaginal pouch'                                  
+   auxOpt2[15] := 'Foam'                                                          
+   auxOpt2[16] := 'Jelly or cream (other than with a diaphragm)'                  
+   auxOpt2[17] := 'Cervical cap'                                                  
+   auxOpt2[18] := 'Suppository, insert'                                           
+   auxOpt2[19] := 'Today™ sponge'                                                 
+   auxOpt2[20] := 'IUD, coil, loop'                                               
+   auxOpt2[21] := 'Other method:' 
+   auxOpt2[22] := 'Any birth control method' 
+   
+   
+   {Multiplier := 0.70}
+   
+   
+   ContactAttemptDate.KEEP
+   ContactAttemptTime.KEEP
+
+   VersionDate := TODATE (2019, 11, 07)
+
+   VersionTime := TOTIME (15, 41, 00)
+   
+   xTime.KEEP
+   xDate.KEEP
+   xTimeGate.KEEP
+   CurrentSecs.KEEP
+   TotalSecs.KEEP
+   TotalMins.KEEP
+   SessionStartDate.KEEP 
+   SessionStartTime.KEEP
+   ContactAttemptDate.KEEP
+   ContactAttemptTime.KEEP
+   ActiveFieldName.KEEP
+   
+   xTimeGate := 1
+   
+   IF xTimeGate = 1 THEN
+      xTime := SYSTIME
+      xDate := SYSDATE
+      TotalSecs := TotalSecs + CurrentSecs   			 
+      ContactAttemptDate := SYSDATE
+      ContactAttemptTime := SYSTIME
+      SessionStartDate     := SYSDATE
+      SessionStartTime     := SYSTIME
+      xTimeGate := 2
+   ENDIF
+   
+   IF xTime = EMPTY AND xDate = EMPTY THEN
+      xTime := SYSTIME
+      xDate := SYSDATE
+      TotalSecs := TotalSecs + CurrentSecs
+      CurrentSecs := 0
+   ENDIF
+
+   
+   CurrentSecs := (ABSTIME(SYSTIME) - ABSTIME(xTime) + 86400000  *(SYSDATE - xDate)) / 1000
+   SurveySecs := TotalSecs + CurrentSecs
+   SurveyMins := SurveySecs/60
+   IWCurrDate := SYSDATE
+   
+   SurveyStarted.keep
+   SurveyStartDate.keep
+   SurveyStartTime.keep
+   				  
+   If SurveyStarted = empty  THEN             
+      SurveyStartDate := sysdate
+      SurveyStartTime := systime
+      SurveyStarted :=1
+   ENDIF
+   
+   Q1Intro
+   QConsent
+   
+   Q1  
+   IF Q1 = EMPTY THEN
+      CHECK
+         Q1 <> EMPTY
+         "Your date of birth is required to continue."
+   ENDIF
+   IF Q1.Year > 2018 THEN
+      SIGNAL
+         Q1.Year <= 2018 
+         "Please confirm your date of birth."  
+   ENDIF 
+
+          
+   IF Q1 <= SYSDATE - (18,0,0) AND NOT q1 <= SYSDATE - (49,0,0) THEN   
+      
+      Gender
+      IF QGender = Female THEN
+         QHisp
+         QRace
+         {IF QHisp = Yes THEN   
+            RaceEthnicity := Hispanic
+         ELSEIF QHisp = No AND BlackAfrAmerican IN QRace  THEN
+            RaceEthnicity := NonHispBlack
+         ELSEIF QHisp = No AND NOT(BlackAfrAmerican IN QRace) AND White IN QRace THEN
+            RaceEthnicity := NonHispWhite
+         ELSE
+            RaceEthnicity := None
+         ENDIF } 
+         
+         IF QHisp = Yes THEN   
+            RaceEthnicity := Hispanic
+         ELSEIF QHisp = No AND BlackAfrAmerican IN QRace  THEN
+            RaceEthnicity := NonHispBlack
+         ELSEIF QHisp = No AND NOT(BlackAfrAmerican IN QRace) THEN
+            RaceEthnicity := NonHispOther
+         ENDIF 
+      
+      
+         {IF RaceEthnicity <> None THEN}
+            Q2
+            IF Q2 = EMPTY THEN
+               CHECK
+                  Q2 <> EMPTY
+                  "Your response is required to continue."
+            ENDIF
+            
+            If Q2 = Yes Then
+               Methods
+               {Q3}
+               IF Q3 = EMPTY THEN
+                  CHECK
+                     Q3 <> EMPTY
+                     "Your response is required to continue."
+               ENDIF
+               
+               IF Q3.CARDINAL > 1 AND opt22 IN Q3 THEN
+                  CHECK
+                     Q3.CARDINAL = 1 OR NOT(opt22 IN Q3)
+                     "You may not choose the \"Never used a contraceptive method\" option along with other choices."   
+               ENDIF 
+               
+               
+               auxTotalMethods := Q3.Cardinal                  
+               
+               // startDate needed as reference for selected months
+               SelectedMonthsStartDate.keep         
+               if (SelectedMonthsStartDate <> response) then
+                 SelectedMonthsStartDate := sysdate
+               endif
+                                 
+               // calculate past 24 months based on start date
+               for i:= 1 to 24 do            
+                  auxCalculatedDate := SelectedMonthsStartDate - (0,i,0)
+                  auxCalculatedMonth := month(auxCalculatedDate)
+                  auxCalculatedYear := year(auxCalculatedDate)
+                  if auxCalculatedMonth = 1 then auxMonthString[i] := 'Jan' endif
+                  if auxCalculatedMonth = 2 then auxMonthString[i] := 'Feb' endif
+                  if auxCalculatedMonth = 3 then auxMonthString[i] := 'Mar' endif
+                  if auxCalculatedMonth = 4 then auxMonthString[i] := 'Apr' endif
+                  if auxCalculatedMonth = 5 then auxMonthString[i] := 'May' endif
+                  if auxCalculatedMonth = 6 then auxMonthString[i] := 'Jun' endif
+                  if auxCalculatedMonth = 7 then auxMonthString[i] := 'Jul' endif
+                  if auxCalculatedMonth = 8 then auxMonthString[i] := 'Aug' endif
+                  if auxCalculatedMonth = 9 then auxMonthString[i] := 'Sep' endif
+                  if auxCalculatedMonth = 10 then auxMonthString[i] := 'Oct' endif
+                  if auxCalculatedMonth = 11 then auxMonthString[i] := 'Nov' endif
+                  if auxCalculatedMonth = 12 then auxMonthString[i] := 'Dec' endif
+                  auxMonthString[i] := auxMonthString[i] + ' ' + str(auxCalculatedYear)            
+               enddo   
+               
+               Q4
+               IF Q4 = EMPTY THEN
+                  SIGNAL 
+                     Q4 <> EMPTY
+                     "You did not select any months. You can leave it empty or make changes now. When you are ready, click/tap \"Okay\" and then <img src=arrowSmall> to continue"
+               ENDIF
+               
+               // only show the selected contraceptive       
+               FOR i:=1 TO 21 DO
+                  IF i IN Q3 THEN Q5[i](i) ENDIF          
+               ENDDO                             
+               
+               Q6_FILL:=''      
+               
+               {Q6_FILL := Q6_FILL + '<table><column></column><column width=20></column><column></column>' }
+               Q6_FILL := Q6_FILL + '<table><column width=55></column><column width=*></column><column></column>'
+       
+               FOR i:=1 to 22 DO            
+                  IF i IN Q3 THEN
+                    
+                     {Q6_FILL := Q6_FILL + '<row><cell><b>' + auxOpt2[i] + '</b></cell><cell></cell><cell></cell></row>' }
+                     Q6_FILL := Q6_FILL + '<row><cell><button width=45 height=25 background=#FF00274C Text="Edit" OnClick="{Action GotoField(\'Q5[' + ToString(i) + '].FIELD_Q5\')}"/></cell><cell><b>' + auxOpt2[i] + '</b></cell><cell></cell></row>'
+                     
+                     FOR m:= 1 to 24 DO
+                        IF m IN Q5[i].FIELD_Q5 THEN 
+                           {Q6_FILL := Q6_FILL + '<row><cell>' + getMonthName(25 - m, SelectedMonthsStartDate) + '</cell><cell></cell><cell></cell></row>'}
+                           Q6_FILL := Q6_FILL + '<row><cell></cell><cell>' + getMonthName(25 - m, SelectedMonthsStartDate) + '</cell><cell></cell></row>' 
+                        ENDIF               
+                     ENDDO
+                     IF Q5[i].FIELD_Q5 = EMPTY THEN
+                        Q6_FILL := Q6_FILL + '<row><cell></cell><cell>' + 'No months selected' + '</cell><cell></cell></row>'
+                        {Q6_FILL := Q6_FILL + '<row><cell>' + 'No months selected' + '</cell><cell></cell><cell></cell></row>'}
+                     ENDIF                       
+                     {Q6_FILL := Q6_FILL + '<newline><row><cell><button width=45 height=25 background=#FF00274C Text="Edit" OnClick="{Action GotoField(\'Q5[' + ToString(i) + '].FIELD_Q5\')}"/></cell><cell colspan=2><newline/></cell></row>'; }
+                     Q6_FILL := Q6_FILL + '<newline><row><cell></cell><cell colspan=2><newline/></cell></row>'; 
+                  ENDIF            
+               ENDDO
+               Q6_FILL := Q6_FILL + '</table>' 
+
+               IF NOT (Opt22 IN Q3) THEN
+                  Q6
+               ENDIF
+               Q7
+               Q8
+            
+            ENDIF  {Q2 = Yes} 
+         {ENDIF {RaceEthnicity <> None}   }
+      
+      
+      ExitText := 'That’s all the questions we have for you. Thank you.'
+      ExitStatus := 0
+      RedirectURI := 'http://app.cloudresearch.com/Router/End?aid=' + AID
+      {Qexit}
+      
+      ENDIF {QGender = Female}
+      
+
+   
+  { ELSE
+      Qexit1}
+      
+   ENDIF  {Q1 <= SYSDATE - (18,0,0) AND NOT q1 <= SYSDATE - (49,0,0)}
+   
+   
+   IF (Q1 > SYSDATE - (18,0,0) OR NOT Q1 > SYSDATE - (49,0,0)) OR QGender <> Female THEN
+      ExitText := 'In this survey we are only interviewing women who are between the ages of 18 and 49. That’s all the questions we have for you. Thank you.'
+      ExitStatus := 1
+      RedirectURI := 'http://app.cloudresearch.com/Router/ThankYouNotQualified?aid=' + AID
+      {Qexit1}
+   ENDIF
+   
+   InstrumentComplete
+   
+   IF InstrumentComplete <> EMPTY THEN
+      Complete := DONE
+      SurveyEnded := 1
+   ENDIF
+   
+   SurveyEnded.keep
+    {IF [LAST VISITED FIELD] <> EMPTY AND SurveyEnded = EMPTY  THEN
+        IWComplete := IWComp
+        SurveyEnded:=1
+    ENDIF} 
+    SurveyEndDate.keep 
+    SurveyEndTime.keep       
+    IF SurveyEndDate = Empty AND SurveyEnded = 1 THEN
+      SurveyEndDate := sysdate
+      SurveyEndTime := systime
+    ENDIF  
+    
+    
+    
+   IF Complete = DONE THEN
+      TotalSecs := TotalSecs + CurrentSecs
+      TotalMins := TotalSecs / 60
+   ENDIF
+
+   InstrumentStartDate := SurveyStartDate    							  
+   					  
+   InstrumentStartTime := SurveyStartTime 
+   InstrumentEndDate :=   SurveyEndDate  
+   InstrumentEndTime :=  SurveyEndTime   
+
+
+   IF SessionStartDate = RESPONSE THEN
+      getDateTimeStr (SessionStartDate, SessionStartTime,  SessionStartDateTime)
+   ENDIF         
+
+   SessionEndDate := sysdate
+   SessionEndTime := sysTime      
+   IF SessionEndDate = RESPONSE THEN
+      getDateTimeStr (SessionEndDate, SessionEndTime,  SessionEndDateTime)
+   ENDIF
+
+
+   IF SurveyStartDate = RESPONSE THEN																			 	  	  						  																  																							   
+      getDateTimeStr (SurveyStartDate, SurveyStartTime,  SurveyStartDateTime)
+   ENDIF
+   InstrumentStartDateTime := SurveyStartDateTime     
+   IF SurveyEndDate = RESPONSE THEN
+      getDateTimeStr (SurveyEndDate, SurveyEndTime,  SurveyEndDateTime)
+   ENDIF
+
+   						 
+   InstrumentEndDateTime := SurveyEndDateTime
+ 
+      
+ENDMODEL

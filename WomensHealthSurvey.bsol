@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Solution Name="WomensHealthSurvey Solution">
+  <StartupProject RelativePath="true">WomensHealthSurvey.bproj</StartupProject>
+  <ProjectItems>
+    <Project RelativePath="true" BuildSequence="2">WomensHealthSurvey.bproj</Project>
+  </ProjectItems>
+</Solution>
